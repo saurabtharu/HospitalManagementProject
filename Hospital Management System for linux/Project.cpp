@@ -1,13 +1,29 @@
+//store time in character variable
+// void TimeDisplay()
+// {
+//     time_t rawtime;
+//     struct tm *timeinfo;
+
+//     time(&rawtime);
+    
+//     timeinfo = localtime(&rawtime);
+
+//     strftime(time101, sizeof(time101), "%d-%m-%Y %H:%M:%S", timeinfo);
+// }
+
 /**************************************************
  * 
  *************************************************/
 #include <iostream>
 #include <iomanip>
 #include <cstring>
+#include <curses.h>
+#include<ncurses.h>
 using namespace std;
 #include "Login.h"
 #include<fstream>
 #include<sstream>
+// #include<os
 
 /**************************************************
  * structure for doctor's detail
@@ -54,6 +70,7 @@ public:
     void displayDoctorInfo();
     void detailOfAllDoctor();
     void fileHandlingDoc(doctorDetail&);
+    // void fileHandlingDoc(int, int, char[]);
 
 };
 
@@ -63,13 +80,16 @@ void Doctor::fileHandlingDoc(doctorDetail &d1){
     ssId << d1.id;
     ssName << d1.name;
  
-    string idStr, nameStr;
+    string idStr,
+        nameStr;
     ssId >> idStr;
     ssName >> nameStr;
 
     d1.fileNameDoc = (idStr + "_" + nameStr + "_doc"+ ".txt").c_str();
+    // string outputFileName = (idStr + "_" + nameStr + "_doc"+ ".txt").c_str();
 
     ofstream outStream(d1.fileNameDoc);
+    // ofstream outStream(outputFileName);
 
     if(outStream)
     {
@@ -103,7 +123,7 @@ void Doctor::addDoctorInfo()
         cout << "\t\t\tOOPS!!! You are not allowed to enter the entries for 0 doctor\n";
         cout << "\n\t\t\t\t  Press any key to enter number of doctors again!!"  ;
         cin.get();
-        system("cls");
+        system("clear");
         goto abc;
     }
     else
@@ -209,6 +229,7 @@ void Doctor::displayDoctorInfo()
             cin.ignore();
             if (get == 'Y' || get == 'y' || get == '\n')
             {
+                // fileHandlingDoc(d1[i].id, i, d1[i].name);
                 fileHandlingDoc(d1[i]);
             }
             cout << "\t\t\t\t\t\t\t:: Doctor's detail is saved into file !!" << endl;
@@ -282,7 +303,11 @@ void Patient::fileHandlingPat(patientDetail &p1){
     ssName >> nameStr;
 
     p1.fileNamePat = (idStr + "_" + nameStr + "_pat"+ ".txt").c_str();
+    // string outputFileName = (idStr + "_" + nameStr + "_doc"+ ".txt").c_str();
+
     ofstream outStream(p1.fileNamePat);
+    // ofstream outStream(outputFileName);
+
     if(outStream)
     {
         
@@ -321,7 +346,7 @@ void Patient::addPatientInfo()
         cout << "\t\t\tOOPS!!! You are not allowed to enter the entries for 0 patient\n";
         cout << "\t\t\t\tPress any key to enter number of patient again!!" ;
         cin.get();
-        system("cls");
+        system("clear");
         goto bcd;
     }
     else{
@@ -416,6 +441,7 @@ void Patient::displayPatientInfo(){
 
             cout << "\t\t\t\t\t\t\t\t\tInformation of Patient " << endl;
             cout << "\t\t\t\t\t\t\t-" << setfill('-') << setw(50) << "-" << endl;
+            // cout << "" << time101 << endl;
             cout << "\t\t\t\t\t\t\t01 >> Patient's Id                   : " << p1[i].id << endl;
             cout << "\t\t\t\t\t\t\t02 >> Patient's Name                 : " << p1[i].name << endl;
             cout << "\t\t\t\t\t\t\t03 >> Patient's Age                  : " << p1[i].age << endl;
@@ -438,6 +464,7 @@ void Patient::displayPatientInfo(){
             cin.ignore();
             if (get == 'Y' || get == 'y' || get == '\n')
             {
+                // fileHandlingPat(d1[i].id, i, d1[i].name);
                 fileHandlingPat(p1[i]);
             }
             cout << "\t\t\t\t\t\t\t:: Patient's detail is saved into file !!" << endl;
@@ -546,13 +573,13 @@ int main()
     Doctor d;
     Patient p;
 
-    system("cls");
+    system("clear");
 
     askKey();
     // cin.get();
     
     label1:
-    system("cls");
+    system("clear");
     cout << "\t\t\t\t\t\t  ******< HOSPITAL MANAGEMENT SYSTEM >******" << endl;
     cout << "\t\t\t\t\t    =" << setfill('=') << setw(50) << "=" << endl << endl;
     cout << "\t\t\t\t\t\t\t1. MENU" << endl << endl;
@@ -569,7 +596,7 @@ int main()
             
 
             label2:
-            system("cls");
+            system("clear");
             cout << "\t\t\t\t\t\t\tWHO ARE YOU??  " << endl;
             cout << "\t\t\t\t\t\t=" << setfill('=') << setw(26) << "=" << endl << endl;
             cout << "\t\t\t\t\t\t\t1. DOCTOR      " << endl << endl;
@@ -584,7 +611,7 @@ int main()
             {
                 case 1:
                     label3:
-                    system("cls");
+                    system("clear");
                     cout << "\t\t\t\t\t\t         *********< DOCTOR'S SYSTEM >*********" << endl;
                     cout << "\t\t\t\t\t\t      =" << setfill('=') << setw(43) << "=" << endl << endl;
                     cout << "\t\t\t\t\t\t\t1. Add new Doctor's Information              " << endl << endl;
@@ -600,35 +627,38 @@ int main()
                     {
 
                         case 1:
-                            system("cls");
+                            system("clear");
                             sleep(0.8);
                             //new doctor's info
                             // TimeDisplay();
                             d.addDoctorInfo();
+                            // system("clear");
                             sleep(0.8);
                             goto label3;
                             break;
 
                         case 2:
-                            system("cls");
+                            system("clear");
                             sleep(0.8);
                             //display doctor's info
                             d.displayDoctorInfo();
+                            // system("clear");
                             sleep(0.8);
                             goto label3;
                             break;
 
                         case 3:
-                            system("cls");
+                            system("clear");
                             sleep(0.8);
                             //details of all the doctor's info
                             d.detailOfAllDoctor();
+                            // system("clear");
                             sleep(0.8);
                             goto label3;
                             break;
 
                         case 4:
-                            system("cls");
+                            system("clear");
                             sleep(0.8);
                             //EXIT
                             goto label2;
@@ -647,7 +677,7 @@ int main()
 
 
                     label4:
-                    system("cls");
+                    system("clear");
                     cout << "\t\t\t\t\t\t         *********< PATIENT'S SYSTEM >*********" << endl;
                     cout << "\t\t\t\t\t\t    =" << setfill('=') << setw(48) << "=" << endl << endl;
                     cout << "\t\t\t\t\t\t\t1. Add new Patient's Information              " << endl << endl;
@@ -664,43 +694,47 @@ int main()
                     {
 
                         case 1:
-                            system("cls");
+                            system("clear");
                             sleep(0.8);
                             //Add new Patient's Information
                             p.addPatientInfo();
+                            // system("clear");
                             sleep(0.8);
                             goto label4;
                             break;
 
                         case 2:
-                            system("cls");
+                            system("clear");
                             sleep(0.8);
                             //Display Patient's Information
                             p.displayPatientInfo();
                             sleep(0.8);
+                            // system("clear");
                             goto label4;
                             break;
 
                         case 3:
-                            system("cls");
+                            system("clear");
                             sleep(0.8);
                             //Details of All the Patient's Information
                             p.detailOfAllPatients();
+                            // system("clear");
                             sleep(0.8);
                             goto label4;
                             break;
 
                         case 4:
-                            system("cls");
+                            system("clear");
                             sleep(0.8);
                             //Generate Patient's Bill
                             p.genPatientBill();
+                            // system("clear");
                             sleep(0.8);
                             goto label4;
                             break;
 
                         case 5:
-                            system("cls");
+                            system("clear");
                             sleep(0.8);
                             //EXIT
                             goto label2;

@@ -4,7 +4,6 @@
 void  askKey(){
     char pass[15];
     int countPass = 5;
-//    sleep(1);
     cout << "\n\n\n\n\n\n\n";
     abc:
     cout << "\t\t\t\t\t\t\t\t------------------------------" << endl;
@@ -16,7 +15,6 @@ void  askKey(){
     cin >> pass;
     cin.ignore();
 
-    system("");
     cout << endl << endl << endl;
 
     if (strcmp(pass, key) == 0)
@@ -53,11 +51,3 @@ void  askKey(){
 
     cout << endl << endl;
 }
-
-// void  loadingDesign(){
-//     int number = 0;
-//     cout << "---------------------------------------";
-
-
-
-// }
