@@ -1,9 +1,10 @@
 /**************************************************
- * 
+ * HOSPITAL MANAGEMENT SYSTEM
  *************************************************/
 #include <iostream>
 #include <iomanip>
 #include <cstring>
+#include<Windows.h>
 using namespace std;
 #include "Login.h"
 #include<fstream>
@@ -49,7 +50,7 @@ class Doctor : public Hospital
 public:
     doctorDetail d1[20];
     int docNo;
-    int indexOfDoctors = 0;
+    int indexOfDoctors;
     void addDoctorInfo();
     void displayDoctorInfo();
     void detailOfAllDoctor();
@@ -67,9 +68,9 @@ void Doctor::fileHandlingDoc(doctorDetail &d1){
     ssId >> idStr;
     ssName >> nameStr;
 
-    d1.fileNameDoc = (idStr + "_" + nameStr + "_doc"+ ".txt").c_str();
+//    d1.fileNameDoc = (idStr + "_" + nameStr + "_doc"+ ".txt").c_str();
 
-    ofstream outStream(d1.fileNameDoc);
+    ofstream outStream((idStr + "_" + nameStr + "_doc"+ ".txt").c_str());
 
     if(outStream)
     {
@@ -261,7 +262,7 @@ class Patient: public Hospital{
     public:
         patientDetail p1[20];
         int patNo;
-        int indexOfPatient = 0;
+        int indexOfPatient;
         void addPatientInfo();
         void displayPatientInfo();
         void detailOfAllPatients();
@@ -281,8 +282,8 @@ void Patient::fileHandlingPat(patientDetail &p1){
     ssId >> idStr;
     ssName >> nameStr;
 
-    p1.fileNamePat = (idStr + "_" + nameStr + "_pat"+ ".txt").c_str();
-    ofstream outStream(p1.fileNamePat);
+//    p1.fileNamePat = (idStr + "_" + nameStr + "_pat"+ ".txt").c_str();
+    ofstream outStream((idStr + "_" + nameStr + "_pat"+ ".txt").c_str());
     if(outStream)
     {
         
@@ -545,9 +546,11 @@ int main()
     int choice1, choice2, choice3, choice4;
     Doctor d;
     Patient p;
-
+    system("mode 650");
+	SetConsoleTitleA("HOSPITAL MANAGEMENT SYSTEM");
+	system("Color 30");
     system("cls");
-
+	
     askKey();
     // cin.get();
     
